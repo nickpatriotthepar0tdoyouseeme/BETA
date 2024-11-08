@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Manager</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" />
+  <style>
+    /* Add any additional custom styles here */
+    .check-data-btn {
+      display: none; /* Hide the button by default */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-8">
+      <h1 class="text-center font-weight-bold text-primary">Account Manager</h1>
+      <h10>ticket</h10>
+      <button class="btn btn-info" onclick="window.print()">Print</button>
+      <hr>
+      
+      <!-- Profile Picture Upload -->
+      <div class="mb-3 text-center">
+        <img id="profile-pic" src="" alt="Profile Picture" class="img-thumbnail" width="150">
+        <input type="file" id="upload-pic" accept="image/*" class="form-control mt-3">
+      </div>
+
+      <!-- Displaying User Information -->
+      <div id="account-info">
+        <p><strong>Username:</strong> <span id="display-username"></span></p>
+        <p><strong>Email:</strong> <span id="display-email"></span></p>
+        <p><strong>Password:</strong> <span id="display-password"></span></p>
+        <p><strong>Region:</strong> <span id="display-region">Detecting...</span></p>
+        <p><strong>City:</strong> <span id="display-city">Detecting...</span></p>
+        <p><strong>Date Created:</strong> <span id="display-date-created"></span></p>
+        <p><strong>Grade:</strong> 
+          <select id="grade-selector" class="form-control w-25 d-inline">
+            <option value="7th">7th</option>
+            <option value="8th">8th</option>
+            <option value="9th">9th</option>
+            <option value="10th">10th</option>
+            <option value="11th">11th</option>
+            <option value="12th">12th</option>
+          </select>
+        </p>
+        <p><strong>Last Login:</strong> <span id="display-last-login"></span></p>
+        <p><strong>Login Code:</strong> <span id="display-login-code"></span></p>
+        <p><strong>Digital Signature:</strong> <span id="display-signature"></span></p>
+      </div>
+      
+      <!-- Check Data Button (hidden by default) -->
+      <div class="text-center mt-4 check-data-btn">
+        <button class="btn btn-warning" id="check-data-btn">Check Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Fetch user location data based on IP
+    fetch("https://ipinfo.io?token=YOUR_TOKEN") // Replace YOUR_TOKEN with your ipinfo.io token
+      .then(response => response.json())
+      .then(data => {
+        const city = data.city || "Unknown City";
+        const region = data.region || "Unknown Region";
+        localStorage.setItem("userCity", city);
+        localStorage.setItem("userRegion", region);
+        document.getElementById("display-city").textContent = city;
+        document.getElementById("display-region").textContent = region;
+      })
+      .catch(error => {
+        document.getElementById("display-city").textContent = "Could not detect city";
+        document.getElementById("display-region").textContent = "Could not detect region";
+      });
+
+    // Sample registration details for demonstration purposes
+    const email = localStorage.getItem("userEmail") || "example@example.com";
+    const password = localStorage.getItem("userPassword") || "********";
+    const username = localStorage.getItem("username") || "User123";
+    const dateCreated = localStorage.getItem("dateCreated") || new Date().toLocaleDateString();
+    const grade = localStorage.getItem("userGrade") || "7th";
+
+    // Generate a 12-digit login code for each session
+    const loginCode = Math.floor(100000000000 + Math.random() * 900000000000);
+    
+    // Generate a 20-digit digital signature if it doesn't exist
+    let signature = localStorage.getItem("digitalSignature");
+    if (!signature) {
+      signature = Math.floor(10000000000000000000 + Math.random() * 90000000000000000000).toString();
+      localStorage.setItem("digitalSignature", signature);
+    }
+
+    document.getElementById("display-username").textContent = username;
+    document.getElementById("display-email").textContent = email;
+    document.getElementById("display-password").textContent = password;
+    document.getElementById("display-date-created").textContent = dateCreated;
+    document.getElementById("display-last-login").textContent = new Date().toLocaleString();
+    document.getElementById("display-login-code").textContent = loginCode;
+    document.getElementById("display-signature").textContent = signature;
+
+    // Profile picture upload and display
+    const profilePic = localStorage.getItem("profilePic");
+    if (profilePic) {
+      document.getElementById("profile-pic").src = profilePic;
+    }
+    document.getElementById("upload-pic").addEventListener("change", function(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64Image = e.target.result;
+        localStorage.setItem("profilePic", base64Image);
+        document.getElementById("profile-pic").src = base64Image;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Set the grade selector to the stored grade
+    const gradeSelector = document.getElementById("grade-selector");
+    gradeSelector.value = grade;
+    gradeSelector.addEventListener("change", () => {
+      const selectedGrade = gradeSelector.value;
+      localStorage.setItem("userGrade", selectedGrade);
+      document.getElementById("display-grade").textContent = selectedGrade;
+    });
+
+    // Check if email is the specific one and show the "Check Data" button
+    if (email === "nickpatriotthepar0t@gmail.com") {
+      document.querySelector(".check-data-btn").style.display = "block";
+      
+      document.getElementById("check-data-btn").addEventListener("click", () => {
+        const enteredPin = prompt("Enter PIN to check data:");
+        if (enteredPin === "0093") {
+          window.location.href = "data.html"; // Redirect to data.html if the PIN is correct
+        } else {
+          alert("Incorrect PIN. Access denied.");
+        }
+      });
+    }
+  });
+</script>
+
+<img src="images/signiture.png">
+</body>
+    
+</html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+</head>
+<body>
+    <!-- Button to create a new post -->
+    <div id="post-news-section" style="display: none;">
+        <button onclick="showPostForm()">ارسال خبر جدید</button>
+    </div>
+
+    <!-- Post form that appears on button click -->
+    <div id="post-form" style="display: none;">
+        <h3>ایجاد پست جدید</h3>
+        <form id="newsForm" method="POST" enctype="multipart/form-data">
+            <label for="subject">عنوان:</label>
+            <input type="text" id="subject" name="subject" required><br>
+            <label for="text">متن:</label>
+            <textarea id="text" name="text" required></textarea><br>
+            <label for="file">بارگذاری فایل:</label>
+            <input type="file" id="file" name="file"><br>
+            <button type="button" onclick="postNews()">ارسال خبر</button>
+        </form>
+    </div>
+
+    <script>
+        // Check if the email matches and show the post button
+        document.addEventListener("DOMContentLoaded", function () {
+            const email = sessionStorage.getItem("userEmail"); // Assuming email is stored in sessionStorage
+            if (email === "nickpatriotthepar0t@gmail.com") {
+                document.getElementById("post-news-section").style.display = "block";
+            }
+        });
+
+        function showPostForm() {
+            document.getElementById("post-form").style.display = "block";
+        }
+
+        // Submit the news to `news.html`
+        function postNews() {
+            const subject = document.getElementById("subject").value;
+            const text = document.getElementById("text").value;
+            const file = document.getElementById("file").files[0];
+            let newsData = { subject, text };
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function () {
+                    newsData.file = reader.result;
+                    localStorage.setItem('newPost', JSON.stringify(newsData));
+                    alert('پست جدید ارسال شد');
+                    window.location.href = 'news.html';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                localStorage.setItem('newPost', JSON.stringify(newsData));
+                alert('پست جدید ارسال شد');
+                window.location.href = 'news.html';
+            }
+        }
+    </script>
+</body>
+    
+</html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Post News Button</title>
+    <style>
+        /* Centering and Styling the Button */
+        #post-news-btn {
+            display: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Button Hover Effect */
+        #post-news-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Form Styling */
+        #post-form {
+            display: none;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Input Fields */
+        #post-form input[type="text"],
+        #post-form textarea,
+        #post-form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Focus Effect on Inputs */
+        #post-form input[type="text"]:focus,
+        #post-form textarea:focus,
+        #post-form input[type="file"]:focus {
+            border-color: #007bff;
+        }
+
+        /* Submit Button Styling */
+        #post-form button[type="button"] {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover Effect for Submit Button */
+        #post-form button[type="button"]:hover {
+            background-color: #218838;
+        }
+
+        /* Fade-In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Button to Create a New Post (Initially Hidden) -->
+<button id="post-news-btn" onclick="showPostForm()">ارسال خبر جدید</button>
+
+<!-- Form for Creating News Post (Initially Hidden) -->
+<div id="post-form">
+    <h3>ایجاد پست جدید</h3>
+    <form id="newsForm" method="POST" enctype="multipart/form-data">
+        <label for="subject">عنوان:</label>
+        <input type="text" id="subject" name="subject" required>
+        <label for="text">متن:</label>
+        <textarea id="text" name="text" required></textarea>
+        <label for="file">بارگذاری فایل:</label>
+        <input type="file" id="file" name="file">
+        <button type="button" onclick="postNews()">ارسال خبر</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Retrieve the email from session storage for demo purposes
+        const email = sessionStorage.getItem("userEmail") || "nickpatriotthepar0t@gmail.com";
+
+        // Show "Post News" button if email matches
+        if (email === "nickpatriotthepar0t@gmail.com") {
+            document.getElementById("post-news-btn").style.display = "block";
+        }
+    });
+
+    // Function to show the news posting form
+    function showPostForm() {
+        document.getElementById("post-form").style.display = "block";
+    }
+
+    // Function to handle news post submission
+    function postNews() {
+        const subject = document.getElementById("subject").value;
+        const text = document.getElementById("text").value;
+        const file = document.getElementById("file").files[0];
+        let newsData = { subject, text };
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                newsData.file = reader.result;
+                localStorage.setItem('newPost', JSON.stringify(newsData));
+                alert('پست جدید ارسال شد');
+                window.location.href = 'news.html';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            localStorage.setItem('newPost', JSON.stringify(newsData));
+            alert('پست جدید ارسال شد');
+            window.location.href = 'news.html';
+        }
+    }
+</script>
+
+</body>
+</html>
+

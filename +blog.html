@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>/* General styling for both pages */
+body {
+  font-family: 'Vazir', sans-serif; /* Make sure you include Vazir or a similar Farsi font */
+  background-color: #f5f7fa;
+  color: #333;
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: linear-gradient(90deg, #3b6978, #204051);
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Styling for the Main Blog Page */
+#subjects {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+#subjects ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#subjects li {
+  margin: 15px 0;
+  text-align: center;
+}
+
+#subjects a {
+  color: #2a9d8f;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+#subjects a:hover {
+  color: #e76f51;
+  text-shadow: 0 0 8px rgba(231, 111, 81, 0.8);
+}
+
+/* Effects for hovering on the subject section */
+#subjects:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for Individual Subject Pages */
+#messageSection {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#messageSection input[type="text"],
+#messageSection textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
+}
+
+#messageSection input[type="text"]:focus,
+#messageSection textarea:focus {
+  border-color: #2a9d8f;
+  outline: none;
+}
+
+#messageSection button {
+  background-color: #2a9d8f;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#messageSection button:hover {
+  background-color: #e76f51;
+  box-shadow: 0 4px 8px rgba(231, 111, 81, 0.3);
+}
+
+#messageSection #messageBox {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#messageSection #messageBox p {
+  margin: 5px 0;
+  padding: 8px;
+  background: #e9f5f2;
+  border-radius: 4px;
+  border-left: 4px solid #2a9d8f;
+}
+
+#messageSection #messageBox p strong {
+  color: #3b6978;
+}
+
+/* File Attachment styling */
+#messageSection input[type="file"] {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+      /* Styling for the list item icon */
+#subjects .icon {
+  width: 20px;           /* Adjust icon size as needed */
+  height: 20px;
+  vertical-align: middle; /* Aligns icon with the text */
+  margin-left: 8px;       /* Spacing between icon and text */
+}
+
+</style>
+  <title>گفتگو</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>گفتگو کاربران</h1>
+  </header>
+  <section id="subjects">
+    <h2>موضوعات فعال 24 ساعت گذشته </h2>
+    <ul>
+      <!-- Add more as needed up to s40.html -->
+    <ul>
+  <li><a href="s1.html">حل مسئله چگونه است؟</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s2.html">موضوع درسی دوم</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s3.html">آشنایی با علوم طبیعی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s4.html">تاریخ و تمدن ایران</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s5.html">ریاضیات پیشرفته</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s6.html">فیزیک پایه</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s7.html">شیمی کاربردی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s8.html">زیست‌شناسی مقدماتی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s9.html">مهارت‌های نوشتن</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s10.html">گرافیک و طراحی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s11.html">زبان انگلیسی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s12.html">مبانی رایانه</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s13.html">آمار و احتمال</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s14.html">هنرهای تجسمی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s15.html">علوم اجتماعی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s16.html">اقتصاد و تجارت</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s17.html">جغرافیای ایران</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s18.html">ادبیات فارسی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s19.html">مهارت‌های شنیداری</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s20.html">بهداشت و سلامت</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s21.html">تاریخ جهان</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s22.html">اصول فلسفه</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s23.html">روانشناسی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s24.html">فیزیک پیشرفته</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s25.html">ریاضیات گسسته</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s26.html">زیست‌شناسی گیاهی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s27.html">مبانی جامعه‌شناسی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s28.html">مهارت‌های گفتاری</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s29.html">برنامه‌نویسی مقدماتی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s30.html">ادبیات معاصر</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s31.html">اقتصاد کلان</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s32.html">ریاضیات کاربردی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s33.html">فلسفه اسلامی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s34.html">ژنتیک</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s35.html">مدیریت کسب و کار</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s36.html">فرهنگ و تمدن اسلامی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s37.html">فیزیک کوانتوم</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s38.html">شیمی آلی</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s39.html">اصول علوم زمین</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+  <li><a href="s40.html">ریاضی و هندسه</a><img src="images/p.jpg" alt="Icon" class="icon"></li>
+</ul>
+
+      <!-- etc. -->
+    </ul>
+  </section>
+        
+      
+   
+</body>
+     <style>
+       
+
+        .navbar {
+            background-color: black;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar a {
+            color: purple;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: white;
+        }
+    </style>
+  <div class="navbar">  
+      <div class="navbar">  
+           <a href="bookmarks.html">🔖Bookmarks</a>
+          <a href="news.html">📰news</a>
+    <a href="page.html">🏠 Main Page</a>
+      <a href="free.html">❌play tic tac toe</a>
+          <a href="+blog.html">➕</a>
+    <a href="load.html">📚 Exams and Books</a>  
+          <a href="notepad.html">📝 Notepad</a>  
+          <a href="account.html">📖account manager</a>
+         
+   
+      
+     
+        </div>
+
+    </div> 
+    
+      
+     
+        </div>
+</html>

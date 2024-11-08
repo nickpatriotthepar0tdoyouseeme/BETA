@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poll Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="token-counter">
+    Tokens: <span id="token-count">5</span>
+  </div>
+
+  <h1 class="text-center">Vote in the Poll</h1>
+  <p class="text-center text-muted">Poll closes in 7 days</p>
+  
+ <div id="poll-section">
+    <!-- Poll Questions -->
+    <div class="poll-question">
+      What grade are you in?
+    </div>
+    <div>
+      <label><input type="radio" name="poll1" value="7"> 7th</label><br>
+      <label><input type="radio" name="poll1" value="8"> 8th</label><br>
+      <label><input type="radio" name="poll1" value="9"> 9th</label><br>
+      <label><input type="radio" name="poll1" value="10"> 10th</label><br>
+      <label><input type="radio" name="poll1" value="11"> 11th</label><br>
+      <label><input type="radio" name="poll1" value="12"> 12th</label>
+    </div>
+
+    <div class="poll-question">
+      What kind of educational products are you looking for?
+    </div>
+    <div>
+      <label><input type="radio" name="poll2" value="ebooks , videos , etc..."> Ebooks, videos, etc.</label><br>
+      <label><input type="radio" name="poll2" value="subscriptions"> Subscriptions</label><br>
+      <label><input type="radio" name="poll2" value="physical books , real classes , etc..."> Physical books, real classes, etc.</label><br>
+      <label><input type="radio" name="poll2" value="other"> Other</label>
+    </div>
+
+    <!-- Additional Polls -->
+    <!-- Duplicate the poll structure to add more questions as required -->
+    <div class="poll-question">What subject do you like the most?</div>
+    <div>
+      <label><input type="radio" name="poll3" value="Math"> Math</label><br>
+      <label><input type="radio" name="poll3" value="Science"> Science</label><br>
+      <label><input type="radio" name="poll3" value="History"> History</label><br>
+      <label><input type="radio" name="poll3" value="Literature"> Literature</label>
+    </div>
+
+    <div class="poll-question">How often do you use online resources for studies?</div>
+    <div>
+      <label><input type="radio" name="poll4" value="Daily"> Daily</label><br>
+      <label><input type="radio" name="poll4" value="Weekly"> Weekly</label><br>
+      <label><input type="radio" name="poll4" value="Occasionally"> Occasionally</label><br>
+      <label><input type="radio" name="poll4" value="Rarely"> Rarely</label>
+    </div>
+      
+      <div class="poll-question">What time of day do you prefer studying?</div>
+<div>
+  <label><input type="radio" name="poll5" value="Morning"> Morning</label><br>
+  <label><input type="radio" name="poll5" value="Afternoon"> Afternoon</label><br>
+  <label><input type="radio" name="poll5" value="Evening"> Evening</label><br>
+  <label><input type="radio" name="poll5" value="Night"> Night</label>
+</div>
+
+<div class="poll-question">Which subject do you find most challenging?</div>
+<div>
+  <label><input type="radio" name="poll6" value="Math"> Math</label><br>
+  <label><input type="radio" name="poll6" value="Science"> Science</label><br>
+  <label><input type="radio" name="poll6" value="History"> History</label><br>
+  <label><input type="radio" name="poll6" value="Literature"> Literature</label>
+</div>
+
+<div class="poll-question">How long do you study on an average day?</div>
+<div>
+  <label><input type="radio" name="poll7" value="Less than 1 hour"> Less than 1 hour</label><br>
+  <label><input type="radio" name="poll7" value="1-2 hours"> 1-2 hours</label><br>
+  <label><input type="radio" name="poll7" value="2-4 hours"> 2-4 hours</label><br>
+  <label><input type="radio" name="poll7" value="More than 4 hours"> More than 4 hours</label>
+</div>
+
+<div class="poll-question">Do you prefer group study or individual study?</div>
+<div>
+  <label><input type="radio" name="poll8" value="Group Study"> Group Study</label><br>
+  <label><input type="radio" name="poll8" value="Individual Study"> Individual Study</label>
+</div>
+
+<div class="poll-question">Which device do you use most for studying?</div>
+<div>
+  <label><input type="radio" name="poll9" value="Laptop"> Laptop</label><br>
+  <label><input type="radio" name="poll9" value="Tablet"> Tablet</label><br>
+  <label><input type="radio" name="poll9" value="Smartphone"> Smartphone</label><br>
+  <label><input type="radio" name="poll9" value="Desktop Computer"> Desktop Computer</label>
+</div>
+
+<div class="poll-question">How often do you take breaks during study sessions?</div>
+<div>
+  <label><input type="radio" name="poll10" value="Every 30 minutes"> Every 30 minutes</label><br>
+  <label><input type="radio" name="poll10" value="Every hour"> Every hour</label><br>
+  <label><input type="radio" name="poll10" value="Every 2 hours"> Every 2 hours</label><br>
+  <label><input type="radio" name="poll10" value="Rarely take breaks"> Rarely take breaks</label>
+</div>
+
+<div class="poll-question">Which type of resources do you find most helpful?</div>
+<div>
+  <label><input type="radio" name="poll11" value="Textbooks"> Textbooks</label><br>
+  <label><input type="radio" name="poll11" value="Online Courses"> Online Courses</label><br>
+  <label><input type="radio" name="poll11" value="Videos"> Videos</label><br>
+  <label><input type="radio" name="poll11" value="Articles"> Articles</label>
+</div>
+
+<div class="poll-question">How often do you participate in class discussions?</div>
+<div>
+  <label><input type="radio" name="poll12" value="Always"> Always</label><br>
+  <label><input type="radio" name="poll12" value="Sometimes"> Sometimes</label><br>
+  <label><input type="radio" name="poll12" value="Rarely"> Rarely</label><br>
+  <label><input type="radio" name="poll12" value="Never"> Never</label>
+</div>
+
+<div class="poll-question">Do you use flashcards for studying?</div>
+<div>
+  <label><input type="radio" name="poll13" value="Yes, often"> Yes, often</label><br>
+  <label><input type="radio" name="poll13" value="Sometimes"> Sometimes</label><br>
+  <label><input type="radio" name="poll13" value="Rarely"> Rarely</label><br>
+  <label><input type="radio" name="poll13" value="Never"> Never</label>
+</div>
+
+<div class="poll-question">What motivates you to study harder?</div>
+<div>
+  <label><input type="radio" name="poll14" value="Grades"> Grades</label><br>
+  <label><input type="radio" name="poll14" value="Future Goals"> Future Goals</label><br>
+  <label><input type="radio" name="poll14" value="Family Expectations"> Family Expectations</label><br>
+  <label><input type="radio" name="poll14" value="Personal Growth"> Personal Growth</label>
+</div>
+
+<div class="poll-question">What do you prefer for note-taking?</div>
+<div>
+  <label><input type="radio" name="poll15" value="Handwritten Notes"> Handwritten Notes</label><br>
+  <label><input type="radio" name="poll15" value="Digital Notes"> Digital Notes</label><br>
+  <label><input type="radio" name="poll15" value="Both"> Both</label><br>
+  <label><input type="radio" name="poll15" value="Don't take notes"> Don't take notes</label>
+</div>
+
+
+    <!-- Additional Poll Questions -->
+    <!-- Repeat similar poll structure up to poll15 -->
+
+    <button id="vote-btn" class="btn btn-custom">Vote and Earn Tokens</button>
+  </div>
+
+  <div class="text-center mt-4">
+    <a id="lucky-draw-btn" href="lucky%20draw.html" class="btn btn-success btn-lucky-draw disabled">Lucky Draw</a>
+  </div>
+</div>
+
+<script>
+  const username = localStorage.getItem("username") || "User123";
+  let tokens = parseInt(localStorage.getItem(`${username}_tokens`) || 5);
+  const hasVotedKey = `${username}_hasVoted`;
+  const tokenCountDisplay = document.getElementById("token-count");
+  const luckyDrawButton = document.getElementById("lucky-draw-btn");
+  const voteButton = document.getElementById("vote-btn");
+
+  function updateTokenDisplay() {
+    tokenCountDisplay.textContent = tokens;
+    localStorage.setItem(`${username}_tokens`, tokens);
+
+    if (tokens >= 20) {
+      luckyDrawButton.classList.remove("disabled");
+    } else {
+      luckyDrawButton.classList.add("disabled");
+    }
+  }
+
+  updateTokenDisplay();
+
+  if (localStorage.getItem(hasVotedKey) === "true") {
+    voteButton.disabled = true;
+    voteButton.classList.add("disabled");
+    voteButton.textContent = "You've already voted";
+    alert("You can only vote once.");
+  }
+
+  voteButton.addEventListener("click", function() {
+    const selectedOptions = Array.from(document.querySelectorAll('input[type="radio"]:checked'))
+      .map(option => option.value);
+
+    if (selectedOptions.length < 10) {
+      alert("Please answer all questions before submitting your vote.");
+      return;
+    }
+
+    tokens += selectedOptions.length * 2; // Award 2 tokens per answered question
+    localStorage.setItem(hasVotedKey, "true");
+    localStorage.setItem(`${username}_tokens`, tokens);
+    localStorage.setItem(`${username}_pollResponses`, JSON.stringify(selectedOptions));
+
+    updateTokenDisplay();
+    voteButton.disabled = true;
+    voteButton.classList.add("disabled");
+    voteButton.textContent = "You've already voted";
+    alert("You can only vote once.");
+  });
+</script>
+<style>
+  .token-counter {
+    font-weight: bold;
+  }
+  .btn-custom {
+    background-color: #007bff;
+    color: white;
+  }
+</style>
+</body>
+</html>
+
+<button id="reset-btn" class="btn btn-warning">Reset Poll</button>
+<script>document.getElementById("reset-btn").addEventListener("click", function() {
+  // Reset tokens to the initial amount
+  tokens = 100;
+  localStorage.setItem(`${username}_tokens`, tokens);
+  updateTokenDisplay();
+  
+  // Enable the vote button again
+  localStorage.removeItem(hasVotedKey);
+  voteButton.disabled = false;
+  voteButton.classList.remove("disabled");
+  voteButton.textContent = "Vote and Earn Tokens";
+
+  alert("Poll has been reset. You can vote again!");
+});
+</script>
+<mark>Note: You need at least 20 tokens to participate in the lucky draw.</mark>
+
+</html>

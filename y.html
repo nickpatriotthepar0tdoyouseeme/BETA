@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Post News Button</title>
+    <style>
+        /* Centering and Styling the Button */
+        #post-news-btn {
+            display: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Button Hover Effect */
+        #post-news-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Form Styling */
+        #post-form {
+            display: none;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Input Fields */
+        #post-form input[type="text"],
+        #post-form textarea,
+        #post-form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Focus Effect on Inputs */
+        #post-form input[type="text"]:focus,
+        #post-form textarea:focus,
+        #post-form input[type="file"]:focus {
+            border-color: #007bff;
+        }
+
+        /* Submit Button Styling */
+        #post-form button[type="button"] {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover Effect for Submit Button */
+        #post-form button[type="button"]:hover {
+            background-color: #218838;
+        }
+
+        /* Fade-In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Button to Create a New Post (Initially Hidden) -->
+<button id="post-news-btn" onclick="showPostForm()">ارسال خبر جدید</button>
+
+<!-- Form for Creating News Post (Initially Hidden) -->
+<div id="post-form">
+    <h3>ایجاد پست جدید</h3>
+    <form id="newsForm" method="POST" enctype="multipart/form-data">
+        <label for="subject">عنوان:</label>
+        <input type="text" id="subject" name="subject" required>
+        <label for="text">متن:</label>
+        <textarea id="text" name="text" required></textarea>
+        <label for="file">بارگذاری فایل:</label>
+        <input type="file" id="file" name="file">
+        <button type="button" onclick="postNews()">ارسال خبر</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Retrieve the email from session storage for demo purposes
+        const email = sessionStorage.getItem("userEmail") || "nickpatriotthepar0t@gmail.com";
+
+        // Show "Post News" button if email matches
+        if (email === "nickpatriotthepar0t@gmail.com") {
+            document.getElementById("post-news-btn").style.display = "block";
+        }
+    });
+
+    // Function to show the news posting form
+    function showPostForm() {
+        document.getElementById("post-form").style.display = "block";
+    }
+
+    // Function to handle news post submission
+    function postNews() {
+        const subject = document.getElementById("subject").value;
+        const text = document.getElementById("text").value;
+        const file = document.getElementById("file").files[0];
+        let newsData = { subject, text };
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                newsData.file = reader.result;
+                localStorage.setItem('newPost', JSON.stringify(newsData));
+                alert('پست جدید ارسال شد');
+                window.location.href = 'news.html';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            localStorage.setItem('newPost', JSON.stringify(newsData));
+            alert('پست جدید ارسال شد');
+            window.location.href = 'news.html';
+        }
+    }
+</script>
+
+</body>
+</html>

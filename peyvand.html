@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه لینک‌های مولاژ</title>
+    <style>
+        body {
+            font-family: 'Vazir', Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+            direction: rtl;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .search-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .links {
+            list-style-type: none;
+            padding: 0;
+        }
+        .links li {
+            background-color: #e0f7fa;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .links li a {
+            text-decoration: none;
+            color: #00796b;
+            font-weight: bold;
+        }
+        .links li:hover {
+            background-color: #b2ebf2;
+        }
+    </style>
+    <script>
+        function searchLinks() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const links = document.querySelectorAll('.links li');
+            links.forEach(link => {
+                const text = link.innerText.toLowerCase();
+                link.style.display = text.includes(input) ? '' : 'none';
+            });
+        }
+    </script>
+</head>
+<body>
+
+<h1>صفحه لینک‌های مولاژ</h1>
+
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="جستجوی مولاژ..." onkeyup="searchLinks()">
+</div>
+
+<ul class="links">
+    <li class="link-item">
+        <img src="https://via.placeholder.com/150?text=مولاژ+قلب" alt="مولاژ قلب">
+        <a href="https://www.amazon.com/s?k=anatomical+heart+model">مولاژ قلب</a>
+    </li>
+    <li class="link-item">
+        <img src="https://via.placeholder.com/150?text=مولاژ+دست" alt="مولاژ دست">
+        <a href="https://www.bhphotovideo.com/c/product/1362903-REG/efx_vst_1_skin_tone_anatomical_mannequin.html">مولاژ دست</a>
+    </li>
+    <li class="link-item">
+        <img src="https://via.placeholder.com/150?text=مولاژ+سر+و+گردن" alt="مولاژ سر و گردن">
+        <a href="https://www.walmart.com/ip/Axis-Scientific-7-Part-Head-Neck-Anatomy-Model/809290926">مولاژ سر و گردن</a>
+    </li>
+    <li class="link-item">
+        <img src="https://via.placeholder.com/150?text=مولاژ+سیستم+گوارش" alt="مولاژ سیستم گوارش">
+        <a href="https://www.lakeshorelearning.com/products/science/anatomy/hands-on-human-body/p/LA379">مولاژ سیستم گوارش</a>
+    </li>
+    <li class="link-item">
+        <img src="https://via.placeholder.com/150?text=مولاژ+چشم" alt="مولاژ چشم">
+        <a href="https://www.labware.com.au/products/eye-anatomy-model">مولاژ چشم</a>
+    </li>
+    <li class="link-item">
+        <img src="https://via.placeholder.com/150?text=مولاژ+ریه" alt="مولاژ ریه">
+        <a href="https://www.anatomywarehouse.com/anatomy-and-physiology-of-the-lung-800023">مولاژ ریه</a>
+    </li>
+    <!-- Repeat the structure above with other real links as needed -->
+</ul>
+</body>
+</html>

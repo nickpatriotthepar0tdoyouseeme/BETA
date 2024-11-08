@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Page</title>
+    
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .message-container { 
+            width: 90%; 
+            max-width: 800px; 
+            background-color: #ffffff; 
+            border-radius: 8px; 
+            padding: 20px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2, h3 {
+            text-align: center;
+            color: #5c6bc0;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            color: #333;
+        }
+        input, textarea, button {
+            width: 100%; 
+            padding: 10px; 
+            margin-top: 5px; 
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #5c6bc0;
+            color: white;
+            border: none;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #3f51b5;
+        }
+        .message {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        .selected-answer {
+            background-color: #e0ffe0;
+            border: 1px solid #4caf50;
+        }
+        .vote-btn {
+            cursor: pointer;
+            color: #5c6bc0;
+            border: none;
+            background: none;
+            font-size: 0.9em;
+            margin: 5px;
+            padding: 5px;
+        }
+        .vote-btn.disabled {
+            color: #999;
+            cursor: not-allowed;
+        }
+        .message-meta {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .message p { 
+            margin: 5px 0;
+        }
+        .selected-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4caf50;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .message-container { max-width: 600px; margin: auto; }
+        .message { padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+        .selected-answer { background-color: #e0ffe0; }
+        .vote-btn { cursor: pointer; margin-right: 5px; }
+        .upvote, .downvote { color: blue; }
+        .disabled { color: gray; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+<div class="message-container">
+    <h2>Conversation Page</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter your username" required>
+    <br><br>
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" placeholder="Enter the subject" required>
+    <br><br>
+    <label for="message">Message:</label>
+    <textarea id="message" placeholder="Write your message here..." required></textarea>
+    <br><br>
+    <button onclick="sendMessage()">Send</button>
+
+    <h3>Messages</h3>
+    <div id="messages"></div>
+</div>
+
+<script>
+    // Load messages from local storage on page load
+    document.addEventListener("DOMContentLoaded", loadMessages);
+
+    // Function to send a message
+    function sendMessage() {
+        const username = document.getElementById("username").value.trim();
+        const subject = document.getElementById("subject").value.trim();
+        const text = document.getElementById("message").value.trim();
+
+        if (!username || !subject || !text) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        const messages = JSON.parse(localStorage.getItem("messages")) || [];
+        const newMessage = {
+            id: Date.now(),
+            username: username,
+            subject: subject,
+            text: text,
+            upvotes: 0,
+            downvotes: 0,
+            isSelected: false
+        };
+
+        messages.push(newMessage);
+        localStorage.setItem("messages", JSON.stringify(messages));
+        loadMessages();
+
+        // Clear inputs
+        document.getElementById("username").value = '';
+        document.getElementById("subject").value = '';
+        document.getElementById("message").value = '';
+    }
+
+    // Function to load messages and display them
+    function loadMessages() {
+        const messages = JSON.parse(localStorage.getItem("messages")) || [];
+        const messagesContainer = document.getElementById("messages");
+        messagesContainer.innerHTML = '';
+
+        messages.sort((a, b) => b.upvotes - a.upvotes);
+
+        messages.forEach(message => {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
+            if (message.isSelected) messageElement.classList.add("selected-answer");
+
+            messageElement.innerHTML = `
+                <p><strong>${message.username}</strong> (${message.subject}):</p>
+                <p>${message.text}</p>
+                <button class="vote-btn upvote ${message.upvoted ? 'disabled' : ''}" onclick="upvote(${message.id})">Upvote (${message.upvotes})</button>
+                <button class="vote-btn downvote ${message.downvoted ? 'disabled' : ''}" onclick="downvote(${message.id})">Downvote (${message.downvotes})</button>
+                ${message.isSelected ? "<p><strong>پاسخ منتخب</strong></p>" : ""}
+            `;
+
+            messagesContainer.appendChild(messageElement);
+        });
+    }
+
+    // Function to upvote a message
+    function upvote(id) {
+        const messages = JSON.parse(localStorage.getItem("messages"));
+        const message = messages.find(msg => msg.id === id);
+
+        if (!message.upvoted && !message.downvoted) {
+            message.upvotes++;
+            message.upvoted = true;
+            checkSelectedAnswer(messages);
+            localStorage.setItem("messages", JSON.stringify(messages));
+            loadMessages();
+        }
+    }
+
+    // Function to downvote a message
+    function downvote(id) {
+        const messages = JSON.parse(localStorage.getItem("messages"));
+        const message = messages.find(msg => msg.id === id);
+
+        if (!message.downvoted && !message.upvoted) {
+            message.downvotes++;
+            message.downvoted = true;
+            localStorage.setItem("messages", JSON.stringify(messages));
+            loadMessages();
+        }
+    }
+
+    // Function to select the message with the most upvotes as "پاسخ منتخب"
+    function checkSelectedAnswer(messages) {
+        messages.forEach(msg => msg.isSelected = false);
+        const selectedMessage = messages.reduce((max, msg) => (msg.upvotes > max.upvotes ? msg : max), messages[0]);
+        if (selectedMessage.upvotes > 0) {
+            selectedMessage.isSelected = true;
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Data</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="text-center">User Data</h1>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Tokens</th>
+        <th>Poll Responses</th>
+      </tr>
+    </thead>
+    <tbody id="user-data-table">
+      <!-- Data rows will be injected here -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  // Assuming usernames are stored in an array
+  const usernames = ["User123"]; // Add more usernames as necessary
+
+  const tableBody = document.getElementById("user-data-table");
+
+  usernames.forEach(username => {
+    const tokens = localStorage.getItem(`${username}_tokens`) || "Not available";
+    const pollResponses = JSON.parse(localStorage.getItem(`${username}_pollResponses`)) || "No responses";
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${username}</td>
+      <td>${tokens}</td>
+      <td>${Array.isArray(pollResponses) ? pollResponses.join(", ") : pollResponses}</td>
+    `;
+    tableBody.appendChild(row);
+  });
+</script>
+
+</body>
+</html>

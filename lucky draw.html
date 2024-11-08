@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucky Draw</title>
+ <style>
+        /* Style for Golden Checkmark Username */
+        .golden {
+            color: gold;
+            font-weight: bold;
+        }
+
+        /* Style for Blue Checkmark Username */
+        .blue {
+            color: blue;
+            font-weight: bold;
+        }
+
+        /* Style for color-changing Avatars text */
+        .color-changing {
+            font-weight: bold;
+            animation: colorChange 2s infinite;
+        }
+
+        /* Keyframes for color-changing animation */
+        @keyframes colorChange {
+            0% { color: red; }
+            50% { color: lawngreen; }
+            100% { color: red; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Prizes</h2>
+    <ul>
+        <li class="golden">Golden Checkmark Username [Rare]</li>
+        <li class="blue">Blue Checkmark Username [Uncommon]</li>
+        <li class="color-changing">Avatars [Can vary from Common to Very Rare]</li>
+    </ul>
+
+</body>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: black;
+      color: white;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    #spin-btn {
+      background-color: #28a745;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #spin-btn:hover {
+      background-color: #218838;
+    }
+
+    #message, #avatar-container, #username-display {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    #tokens-info {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Lucky Draw</h1>
+  <button id="spin-btn">Spin the Wheel!</button>
+  <div id="message"></div>
+  <div id="avatar-container"></div>
+  <div id="username-display"></div>
+  <div id="tokens-info">Tokens: <span id="tokens-count"></span></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const username = localStorage.getItem("username") || "User123";
+    let tokens = parseInt(localStorage.getItem(`${username}_tokens`) || 5);
+    const spinCost = 20;
+
+    const spinBtn = document.getElementById("spin-btn");
+    const message = document.getElementById("message");
+    const tokensCount = document.getElementById("tokens-count");
+    const avatarContainer = document.getElementById("avatar-container");
+    const usernameDisplay = document.getElementById("username-display");
+
+    // Update token display
+    function updateTokenDisplay() {
+      tokensCount.textContent = tokens;
+      localStorage.setItem(`${username}_tokens`, tokens);
+    }
+
+    updateTokenDisplay();
+
+    // Spin button click event
+    spinBtn.addEventListener("click", () => {
+      if (tokens < spinCost) {
+        message.textContent = "You don't have enough tokens to spin.";
+        return;
+      }
+
+      tokens -= spinCost;
+      updateTokenDisplay();
+
+      // Define outcomes with probabilities
+      const outcomes = [
+        { name: "null", probability: 88.75 },
+        { name: "avatars", probability: 10 },
+        { name: "blue-check", probability: 1 },
+        { name: "golden-check", probability: 0.25 }
+      ];
+
+      const result = getSpinResult(outcomes);
+
+      setTimeout(() => {
+        if (result === "null") {
+          message.textContent = "Sorry, better luck next time!";
+        } else if (result === "avatars") {
+          message.textContent = "Congratulations! You won an Avatar!";
+          showAvatar();
+        } else {
+          const checkColor = result === "blue-check" ? "Blue" : "Golden";
+          const checkImage = result === "blue-check" ? "bluecheck.png" : "goldcheck.png";
+          message.textContent = `Congratulations! You won a ${checkColor} Checkmark!`;
+          showCheckmark(checkImage);
+        }
+      }, 1500);
+    });
+
+    // Function to simulate the spin result
+    function getSpinResult(outcomes) {
+      const random = Math.random() * 100;
+      let cumulativeProbability = 0;
+
+      for (let outcome of outcomes) {
+        cumulativeProbability += outcome.probability;
+        if (random < cumulativeProbability) return outcome.name;
+      }
+      return outcomes[outcomes.length - 1].name;
+    }
+
+    // Show avatar with download button
+    function showAvatar() {
+      const avatarImages = ["images/a1.png", "images/a2.png", "images/a3.png", "images/a4.png", "images/a5.png" , "images/a6.png"];
+      const randomAvatar = avatarImages[Math.floor(Math.random() * avatarImages.length)];
+      
+      avatarContainer.innerHTML = `<img src="${randomAvatar}" alt="Avatar" style="width:100px;"><br><a href="${randomAvatar}" download>Download Avatar</a>`;
+    }
+
+    // Show checkmark next to username
+    function showCheckmark(checkImage) {
+      const randomUsername = generateRandomUsername();
+      usernameDisplay.innerHTML = `<span>${randomUsername}</span><img src="images/${checkImage}" alt="Checkmark" style="width:20px; vertical-align: middle;">`;
+    }
+
+    // Generate random username
+    function generateRandomUsername() {
+      const adjectives = ["Awesome", "Lucky", "Brave", "Mighty"];
+      const nouns = ["Coder", "Hacker", "Explorer", "Master"];
+      return `${adjectives[Math.floor(Math.random() * adjectives.length)]}${nouns[Math.floor(Math.random() * nouns.length)]}${Math.floor(Math.random() * 1000)}`;
+    }
+  });
+</script>
+
+</body>
+</html>
